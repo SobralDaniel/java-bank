@@ -25,6 +25,7 @@ public class CheckingAccountTest {
             return false;
         }
 
+        // account balance should not go below zero
         account.debit(50);
         if (account.getBalance() != 40){
             return false;
