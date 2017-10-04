@@ -1,9 +1,6 @@
 package org.academiadecodigo.javabank.test;
 
-import org.academiadecodigo.javabank.domain.Account;
-import org.academiadecodigo.javabank.domain.AccountType;
-import org.academiadecodigo.javabank.domain.Bank;
-import org.academiadecodigo.javabank.domain.Customer;
+import org.academiadecodigo.javabank.domain.*;
 
 public class BankTest {
 
@@ -16,10 +13,10 @@ public class BankTest {
             return false;
         }
 
-        Account a1 = new Account(1, AccountType.CHECKING);
-        Account a2 = new Account(2, AccountType.SAVINGS);
-        Account a3 = new Account(3, AccountType.CHECKING);
-        Account a4 = new Account(4, AccountType.SAVINGS);
+        Account a1 = new CheckingAccount(1);
+        Account a2 = new SavingAccount(2);
+        Account a3 = new CheckingAccount(3);
+        Account a4 = new SavingAccount(4);
 
         a1.credit(10);
         a2.credit(20);

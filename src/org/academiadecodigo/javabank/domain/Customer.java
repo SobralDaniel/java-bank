@@ -36,7 +36,7 @@ public class Customer {
 
         Account account = accounts.get(id);
 
-        if (account.getAccountType() == AccountType.SAVINGS) {
+        if (account instanceof SavingAccount) {
             return;
         }
 
@@ -49,19 +49,14 @@ public class Customer {
         Account srcAccount = accounts.get(srcId);
         Account dstAccount = accounts.get(destId);
 
-        // if there is no balance in src account do nothing
+        /*// if there is no balance in src account do nothing
         if (srcAccount.getBalance() < amount) {
             return;
-        }
+        }*/
 
-        // if src account is savings, we need to keep a minimum balance
-        if (srcAccount.getAccountType() == AccountType.SAVINGS &&
-                srcAccount.getBalance() < MIN_SAVINGS_BALANCE + amount) {
-            return;
-        }
 
-        srcAccount.debit(amount);
-        dstAccount.credit(amount);
+        if(srcAccount.debit(amount))
+            dstAccount.credit(amount);
 
     }
 

@@ -1,8 +1,6 @@
 package org.academiadecodigo.javabank.test;
 
-import org.academiadecodigo.javabank.domain.Account;
-import org.academiadecodigo.javabank.domain.AccountType;
-import org.academiadecodigo.javabank.domain.Customer;
+import org.academiadecodigo.javabank.domain.*;
 
 public class CustomerTest {
 
@@ -15,8 +13,10 @@ public class CustomerTest {
             return false;
         }
 
-        Account a1 = new Account(1, AccountType.CHECKING);
-        Account a2 = new Account(2, AccountType.SAVINGS);
+        Account a1 = new CheckingAccount(1);
+        Account a2 = new SavingAccount(2);
+
+
         a1.credit(100);
         a2.credit(120);
 
@@ -35,6 +35,7 @@ public class CustomerTest {
 
         // customer must be able to perform transfers between accounts
         customer.transfer(a2.getId(), a1.getId(), 20);
+
         if (a2.getBalance() != 100 || a1.getBalance() != 120) {
             return false;
         }
