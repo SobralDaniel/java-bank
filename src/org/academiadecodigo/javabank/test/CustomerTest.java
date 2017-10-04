@@ -46,6 +46,12 @@ public class CustomerTest {
             return false;
         }
 
+        // customer must not be able to perform transfers that exceeds source amount
+        customer.transfer(a2.getId(), a1.getId(), 100);
+
+        if (a1.getBalance() != 120 || a2.getBalance() != 100) {
+            return false;
+        }
         return true;
     }
 }

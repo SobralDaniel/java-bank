@@ -49,12 +49,6 @@ public class Customer {
         Account srcAccount = accounts.get(srcId);
         Account dstAccount = accounts.get(destId);
 
-        /*// if there is no balance in src account do nothing
-        if (srcAccount.getBalance() < amount) {
-            return;
-        }*/
-
-
         if(srcAccount.debit(amount))
             dstAccount.credit(amount);
 
