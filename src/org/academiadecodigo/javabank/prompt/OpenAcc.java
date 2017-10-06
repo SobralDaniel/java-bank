@@ -11,7 +11,7 @@ public class OpenAcc implements Execute{
     }
 
     @Override
-    public void execute(int customerID) {
+    public void execute() {
 
     }
 }

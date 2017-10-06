@@ -39,8 +39,11 @@ public class Bank {
         return customersID;
     }
 
-    public void setActive(Customer customer){
-        this.active = customer;
+    public void setActive(int customerID){
+        for (Customer customer: customers) {
+            if(customer.getCustomerID()==customerID)
+                this.active = customer;
+        }
     }
 
     public Customer getActive() {

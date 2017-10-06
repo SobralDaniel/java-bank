@@ -6,6 +6,7 @@ import org.academiadecodigo.javabank.managers.AccountManager;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Customer {
 
@@ -44,6 +45,10 @@ public class Customer {
 
      public int getCustomerID(){
         return this.customerID;
+     }
+
+     public Set getAccounts(){
+         return accounts.keySet();
      }
 
 }

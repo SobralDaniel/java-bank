@@ -27,9 +27,9 @@ public class PromptInterface {
 
         Prompt prompt = new Prompt(System.in, System.out);
         IntegerSetInputScanner scanner1 = new IntegerSetInputScanner(bank.getCostumersID());
-        scanner1.setMessage("Insert your account number: ");
+        scanner1.setMessage("Insert your customer number: ");
         scanner1.setError("That is not a valid account!");
-        int customer = prompt.getUserInput(scanner1);
+        bank.setActive(prompt.getUserInput(scanner1));
 
         String[] options = {"Deposit", "Withdraw", "Transfer", "Open Account", "Quit"};
         MenuInputScanner scanner2 = new MenuInputScanner(options);
@@ -38,7 +38,7 @@ public class PromptInterface {
         int option = prompt.getUserInput(scanner2);
         System.out.println(option);
         switch(option){
-            case 1:
+            case 1: Deposit.execute();
                     break;
             case 2: break;
             case 3: break;
