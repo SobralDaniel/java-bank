@@ -9,8 +9,13 @@ import java.util.Map;
 
 public class Customer {
 
+    private int customerID;
     private AccountManager accountManager;
     private Map<Integer, Account> accounts = new HashMap<>();
+
+    public Customer(int id){
+        this.customerID=id;
+    }
 
     public void setAccountManager(AccountManager accountManager) {
         this.accountManager = accountManager;
@@ -36,5 +41,9 @@ public class Customer {
 
         return balance;
     }
+
+     public int getCustomerID(){
+        return this.customerID;
+     }
 
 }

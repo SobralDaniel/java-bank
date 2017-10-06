@@ -4,14 +4,15 @@ import org.academiadecodigo.javabank.domain.account.Account;
 import org.academiadecodigo.javabank.domain.account.AccountType;
 import org.academiadecodigo.javabank.domain.account.CheckingAccount;
 import org.academiadecodigo.javabank.domain.account.SavingsAccount;
+import org.academiadecodigo.javabank.factories.AccountFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class AccountManager {
 
-    private static int numberAccounts = 0;
     Map<Integer, Account> accountMap;
+    AccountFactory accountFactory = new AccountFactory();
 
     public AccountManager() {
         this.accountMap = new HashMap<>();
@@ -19,14 +20,7 @@ public class AccountManager {
 
     public Account openAccount(AccountType accountType) {
 
-        Account newAccount;
-
-        numberAccounts++;
-        if (accountType == AccountType.CHECKING) {
-            newAccount = new CheckingAccount(numberAccounts);
-        } else {
-            newAccount = new SavingsAccount(numberAccounts);
-        }
+        Account newAccount = accountFactory.createAcc(accountType);
 
         accountMap.put(newAccount.getId(), newAccount);
         return newAccount;
