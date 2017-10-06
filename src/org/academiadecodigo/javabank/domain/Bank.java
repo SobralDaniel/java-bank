@@ -9,6 +9,7 @@ public class Bank {
 
     private AccountManager accountManager;
     private Set<Customer> customers = new HashSet<>();
+    private Customer active;
 
     public Bank(AccountManager accountManager) {
         this.accountManager = accountManager;
@@ -30,4 +31,19 @@ public class Bank {
         return balance;
     }
 
+    public Set getCostumersID() {
+        Set<Integer> customersID = new HashSet<>();
+        for (Customer customer : customers) {
+            customersID.add(customer.getCustomerID());
+        }
+        return customersID;
+    }
+
+    public void setActive(Customer customer){
+        this.active = customer;
+    }
+
+    public Customer getActive() {
+        return active;
+    }
 }
