@@ -5,6 +5,7 @@ import org.academiadecodigo.javabank.domain.account.AccountType;
 import org.academiadecodigo.javabank.managers.AccountManager;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ public class Customer {
 
     private int customerID;
     private AccountManager accountManager;
+    private Set<Integer> noaccounts = new HashSet<>();
     private Map<Integer, Account> accounts = new HashMap<>();
 
     public Customer(int id){
@@ -48,7 +50,10 @@ public class Customer {
      }
 
      public Set getAccounts(){
+         if(accounts.isEmpty())
+            return noaccounts;
          return accounts.keySet();
+
      }
 
 }

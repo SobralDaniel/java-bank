@@ -1,10 +1,13 @@
 package org.academiadecodigo.javabank.prompt;
 
 import org.academiadecodigo.bootcamp.Prompt;
+import org.academiadecodigo.bootcamp.scanners.integer.IntegerInputScanner;
 import org.academiadecodigo.bootcamp.scanners.integer.IntegerSetInputScanner;
 import org.academiadecodigo.javabank.domain.Bank;
 import org.academiadecodigo.javabank.domain.Customer;
 import org.academiadecodigo.javabank.managers.AccountManager;
+
+import java.util.Set;
 
 public class Deposit implements Execute{
     AccountManager accountManager;
@@ -17,11 +20,7 @@ public class Deposit implements Execute{
 
     @Override
     public void execute() {
-        Prompt prompt = new Prompt(System.in, System.out);
-        IntegerSetInputScanner scanner1 = new IntegerSetInputScanner(bank.getActive().getAccounts());
-        scanner1.setMessage("Insert your account number: ");
-        scanner1.setError("That is not a valid account!");
-        bank.setActive(prompt.getUserInput(scanner1));
-
+        Menu menu = new Menu(bank, accountManager);
+        accountManager.deposit(menu.dstAcc(),menu.amount());
     }
 }
