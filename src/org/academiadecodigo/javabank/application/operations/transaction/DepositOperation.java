@@ -13,6 +13,10 @@ public class DepositOperation extends AbstractAccountTransactionOperation {
 
         super.execute();
 
+        if (!hasAccounts()) {
+            return;
+        }
+
         Integer accountId = scanAccount();
         Double amount = scanAmount();
 

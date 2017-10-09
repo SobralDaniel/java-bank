@@ -20,7 +20,7 @@ public class Messages {
 
     public final static String ERROR_INVALID_OPTION = "That is an invalid option";
     public final static String ERROR_INVALID_CUSTOMER = "You do not seem to be a valid customer";
-    public final static String ERROR_NO_ACCOUNT = "Open a bank transaction first, please!";
+    public final static String ERROR_NO_ACCOUNT = "Open a bank account first, please!";
     public final static String ERROR_INVALID_ACCOUNT = "That is an invalid account!";
     public final static String ERROR_INVALID_AMOUNT = "That is an invalid amount!";
 
