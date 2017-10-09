@@ -1,4 +1,4 @@
-package org.academiadecodigo.javabank.application;
+package org.academiadecodigo.javabank.utils;
 
 public class Messages {
 

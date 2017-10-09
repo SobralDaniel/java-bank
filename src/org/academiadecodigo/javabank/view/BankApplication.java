@@ -1,12 +1,15 @@
-package org.academiadecodigo.javabank.application;
+package org.academiadecodigo.javabank.view;
 
 import org.academiadecodigo.bootcamp.scanners.menu.MenuInputScanner;
 import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.bootcamp.scanners.integer.IntegerSetInputScanner;
-import org.academiadecodigo.javabank.application.operations.*;
-import org.academiadecodigo.javabank.application.operations.transaction.DepositOperation;
-import org.academiadecodigo.javabank.application.operations.transaction.WithdrawOperation;
-import org.academiadecodigo.javabank.domain.Bank;
+import org.academiadecodigo.javabank.controller.operations.BalanceOperation;
+import org.academiadecodigo.javabank.controller.operations.NewAccountOperation;
+import org.academiadecodigo.javabank.controller.operations.Operation;
+import org.academiadecodigo.javabank.controller.operations.transaction.DepositOperation;
+import org.academiadecodigo.javabank.controller.operations.transaction.WithdrawOperation;
+import org.academiadecodigo.javabank.model.domain.Bank;
+import org.academiadecodigo.javabank.utils.Messages;
 
 import java.util.HashMap;
 import java.util.Map;
