@@ -9,6 +9,7 @@ public class Bank {
 
     private AccountManager accountManager;
     private HashMap<Integer, Customer> customers;
+    private Customer activeCustomer;
 
     public Bank() {
         this.customers = new HashMap<>();
@@ -45,4 +46,13 @@ public class Bank {
     public AccountManager getAccountManager() {
         return accountManager;
     }
+
+    public Customer getActiveCustomer() {
+        return activeCustomer;
+    }
+
+    public void setActiveCustomer(Customer customer) {
+        this.activeCustomer = customer;
+    }
+
 }
