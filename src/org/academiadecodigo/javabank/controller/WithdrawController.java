@@ -1,9 +1,10 @@
 package org.academiadecodigo.javabank.controller;
 
 import org.academiadecodigo.javabank.controller.managers.AccountManager;
+import org.academiadecodigo.javabank.model.domain.account.Account;
 import org.academiadecodigo.javabank.view.View;
 
-public class DepositController implements Controller{
+public class WithdrawController implements Controller{
     View view;
     Controller controller;
     AccountManager accountManager;
@@ -14,7 +15,7 @@ public class DepositController implements Controller{
     }
 
     public void finish(int acc, double amount){
-        accountManager.deposit(acc, amount);
+        accountManager.withdraw(acc, amount);
         controller.init();
     }
 

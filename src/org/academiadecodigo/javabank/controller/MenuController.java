@@ -12,7 +12,6 @@ public class MenuController implements Controller{
     private View view;
     private Bank bank;
     private Prompt prompt;
-    private Controller nxtController;
     private Map<Integer, Controller> operationsMap;
 
     public MenuController(Bank bank, Prompt prompt) {
@@ -27,10 +26,6 @@ public class MenuController implements Controller{
 
     public void setView(View view) {
         this.view = view;
-    }
-
-    public void setNxtController(Controller nxtController) {
-        this.nxtController = nxtController;
     }
 
     public void setOperationsMap(Map<Integer, Controller> operationsMap) {

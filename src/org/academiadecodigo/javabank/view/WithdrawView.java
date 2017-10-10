@@ -4,17 +4,18 @@ import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.bootcamp.scanners.integer.IntegerSetInputScanner;
 import org.academiadecodigo.bootcamp.scanners.precisiondouble.DoubleInputScanner;
 import org.academiadecodigo.javabank.controller.DepositController;
+import org.academiadecodigo.javabank.controller.WithdrawController;
 import org.academiadecodigo.javabank.model.domain.Bank;
 import org.academiadecodigo.javabank.utils.Messages;
 
 import java.util.Set;
 
-public class DepositView implements View{
+public class WithdrawView implements View{
     Bank bank;
     Prompt prompt;
-    DepositController depositController;
+    WithdrawController withdrawController;
 
-    public DepositView(Bank bank, Prompt prompt) {
+    public WithdrawView(Bank bank, Prompt prompt) {
         this.bank = bank;
         this.prompt = prompt;
     }
@@ -24,7 +25,7 @@ public class DepositView implements View{
         Set<Integer> accounts = bank.getActiveCustomer().getAccountIds();
         if(accounts.isEmpty()){
             System.out.println(Messages.ERROR_NO_ACCOUNT);
-            depositController.noAcc();
+            withdrawController.noAcc();
         }
         System.out.println(accounts.toString());
         IntegerSetInputScanner scanner = new IntegerSetInputScanner(accounts);
@@ -35,10 +36,10 @@ public class DepositView implements View{
         scanner2.setMessage(Messages.CHOOSE_AMOUNT);
         scanner2.setError(Messages.ERROR_INVALID_AMOUNT);
         double amount = prompt.getUserInput(scanner2);
-        depositController.finish(acc1, amount);
+        withdrawController.finish(acc1, amount);
     }
 
-    public void setDepositController(DepositController depositController) {
-        this.depositController = depositController;
+    public void setWithdrawController(WithdrawController withdrawController) {
+        this.withdrawController = withdrawController;
     }
 }

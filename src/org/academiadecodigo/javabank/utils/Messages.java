@@ -9,6 +9,8 @@ public class Messages {
     public final static String MENU_WITHDRAW = "Make Withdrawal";
     public final static String MENU_GET_BALANCE = "View Balance";
     public final static String MENU_QUIT = "Quit";
+    public final static String MENU_CHECKING = "Checking";
+    public final static String MENU_SAVINGS = "Savings";
 
     public final static String OPEN_ACCOUNTS = "You have the following accounts: ";
     public final static String CREATED_ACCOUNT = "Created account for ";
