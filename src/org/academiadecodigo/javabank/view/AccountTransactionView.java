@@ -12,7 +12,7 @@ public class AccountTransactionView extends AbstractView {
     @Override
     public void show() {
 
-        if (customerService.getLoginCustomer().getAccountIds().size() == 0) {
+        if (transactionController.getActiveAccountIds().size() == 0) {
             showNoAccounts();
             return;
         }
@@ -34,7 +34,7 @@ public class AccountTransactionView extends AbstractView {
 
         StringBuilder builder = new StringBuilder();
 
-        for (Integer id : customerService.getLoginCustomer().getAccountIds()) {
+        for (Integer id : transactionController.getActiveAccountIds()) {
             builder.append(id);
             builder.append(" ");
         }
@@ -44,8 +44,7 @@ public class AccountTransactionView extends AbstractView {
 
     private int scanAccount() {
 
-        Customer customer = customerService.getLoginCustomer();
-        IntegerSetInputScanner scanner = new IntegerSetInputScanner(customer.getAccountIds());
+        IntegerSetInputScanner scanner = new IntegerSetInputScanner(transactionController.getActiveAccountIds());
         scanner.setMessage(Messages.VIEW_ACCOUNT_TRANSACTION_ACCOUNTID_MESSAGE);
         scanner.setError(Messages.VIEW_ACCOUNT_TRANSACTION_INVALID_ACCOUNT_ERROR);
         return prompt.getUserInput(scanner);

@@ -3,6 +3,7 @@ package org.academiadecodigo.javabank;
 import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.javabank.controller.transaction.DepositController;
 import org.academiadecodigo.javabank.controller.transaction.WithdrawalController;
+import org.academiadecodigo.javabank.services.AuthenticationService;
 import org.academiadecodigo.javabank.services.CustomerService;
 import org.academiadecodigo.javabank.view.UserOptions;
 import org.academiadecodigo.javabank.controller.*;
@@ -16,11 +17,14 @@ import java.util.Map;
 
 public class Bootstrap {
 
-    public CustomerService generateTestData() {
+    public AuthenticationService generateTestData() {
 
         CustomerService customerService = new CustomerService();
         AccountService accountService = new AccountService();
+        AuthenticationService authenticationService = new AuthenticationService();
         customerService.setAccountService(accountService);
+        authenticationService.setCustomerService(customerService);
+
 
         Customer c1 = new Customer(1, "Rui");
         Customer c2 = new Customer(2, "Sergio");
@@ -29,11 +33,11 @@ public class Bootstrap {
         customerService.addCustomer(c2);
         customerService.addCustomer(c3);
 
-        return customerService;
+        return authenticationService;
     }
 
-    public LoginController wireObjects(CustomerService customerService) {
-
+    public LoginController wireObjects(AuthenticationService authenticationService) {
+        CustomerService customerService = authenticationService.getCustomerService();
         // attach all input to standard i/o
         Prompt prompt = new Prompt(System.in, System.out);
 
@@ -41,30 +45,31 @@ public class Bootstrap {
         LoginController loginController = new LoginController();
         LoginView loginView = new LoginView();
         loginController.setView(loginView);
-        loginController.setCustomerService(customerService);
-        loginView.setCustomerService(customerService);
+        loginController.setAuthenticationService(authenticationService);
         loginView.setLoginController(loginController);
         loginView.setPrompt(prompt);
 
         // wire main controller and view
         MainController mainController = new MainController();
         MainView mainView = new MainView();
-        mainView.setCustomerService(customerService);
         mainView.setPrompt(prompt);
         mainView.setMainController(mainController);
         mainController.setView(mainView);
+        mainController.setAuthenticationService(authenticationService);
         loginController.setNextController(mainController);
 
         // wire balance controller and view
         BalanceController balanceController = new BalanceController();
         BalanceView balanceView = new BalanceView();
         balanceController.setView(balanceView);
-        balanceView.setCustomerService(customerService);
+        balanceController.setAuthenticationService(authenticationService);
+        balanceView.setBalanceController(balanceController);
 
         // wire new account controller and view
         NewAccountView newAccountView = new NewAccountView();
         NewAccountController newAccountController = new NewAccountController();
         newAccountController.setCustomerService(customerService);
+        newAccountController.setAuthenticationService(authenticationService);
         newAccountController.setView(newAccountView);
         newAccountView.setNewAccountController(newAccountController);
 
@@ -74,15 +79,16 @@ public class Bootstrap {
         AccountTransactionView depositView = new AccountTransactionView();
         AccountTransactionView withdrawView = new AccountTransactionView();
         depositController.setCustomerService(customerService);
+        depositController.setAuthenticationService(authenticationService);
         depositController.setView(depositView);
         withdrawalController.setCustomerService(customerService);
+        withdrawalController.setAuthenticationService(authenticationService);
         withdrawalController.setView(withdrawView);
-        depositView.setCustomerService(customerService);
         depositView.setPrompt(prompt);
         depositView.setTransactionController(depositController);
-        withdrawView.setCustomerService(customerService);
         withdrawView.setPrompt(prompt);
         withdrawView.setTransactionController(withdrawalController);
+
 
         // setup the controller map
         Map<Integer, Controller> controllerMap = new HashMap<>();

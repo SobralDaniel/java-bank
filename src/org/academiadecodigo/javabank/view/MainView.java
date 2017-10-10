@@ -16,7 +16,7 @@ public class MainView extends AbstractView {
 
         MenuInputScanner scanner = new MenuInputScanner(UserOptions.getMessages());
         scanner.setError(Messages.VIEW_MAIN_ERROR);
-        scanner.setMessage("\n" + Messages.VIEW_MAIN_MESSAGE + customerService.getLoginCustomer().getName());
+        scanner.setMessage("\n" + Messages.VIEW_MAIN_MESSAGE + mainController.getLoginCustomerName());
         mainController.onMenuSelection(prompt.getUserInput(scanner));
     }
 

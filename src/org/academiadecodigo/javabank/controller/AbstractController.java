@@ -14,4 +14,5 @@ public abstract class AbstractController implements Controller {
     public void init() {
         view.show();
     }
+
 }
