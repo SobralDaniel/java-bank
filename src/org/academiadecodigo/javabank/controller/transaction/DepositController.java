@@ -4,6 +4,6 @@ public class DepositController extends AbstractAccountTransactionController {
 
     @Override
     public void submitTransaction(int accountId, double amount) {
-        bank.getAccountManager().deposit(accountId, amount);
+        customerService.getAccountService().deposit(accountId, amount);
     }
 }

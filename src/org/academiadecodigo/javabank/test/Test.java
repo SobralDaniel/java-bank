@@ -32,11 +32,11 @@ public class Test {
 
     private void testAccountManager() {
         AccountManagerTest accountManagerTest = new AccountManagerTest();
-        System.out.println("AccountManager: " + Test.getResult(accountManagerTest.test()));
+        System.out.println("AccountService: " + Test.getResult(accountManagerTest.test()));
     }
 
     private void testBank() {
         BankTest bankTest = new BankTest();
-        System.out.println("Bank: " + Test.getResult(bankTest.test()));
+        System.out.println("CustomerService: " + Test.getResult(bankTest.test()));
     }
 }
