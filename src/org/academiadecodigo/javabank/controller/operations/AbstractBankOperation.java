@@ -1,7 +1,7 @@
 package org.academiadecodigo.javabank.controller.operations;
 
 import org.academiadecodigo.javabank.view.BankApplication;
-import org.academiadecodigo.javabank.model.domain.Customer;
+import org.academiadecodigo.javabank.model.Customer;
 
 public abstract class AbstractBankOperation implements Operation {
 

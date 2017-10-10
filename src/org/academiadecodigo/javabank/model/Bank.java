@@ -1,4 +1,4 @@
-package org.academiadecodigo.javabank.model.domain;
+package org.academiadecodigo.javabank.model;
 
 import org.academiadecodigo.javabank.controller.managers.AccountManager;
 

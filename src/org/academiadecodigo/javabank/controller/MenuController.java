@@ -1,8 +1,7 @@
 package org.academiadecodigo.javabank.controller;
 
 import org.academiadecodigo.bootcamp.Prompt;
-import org.academiadecodigo.javabank.controller.operations.Operation;
-import org.academiadecodigo.javabank.model.domain.Bank;
+import org.academiadecodigo.javabank.model.Bank;
 import org.academiadecodigo.javabank.view.UserOptions;
 import org.academiadecodigo.javabank.view.View;
 

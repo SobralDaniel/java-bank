@@ -4,7 +4,7 @@ import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.bootcamp.scanners.integer.IntegerSetInputScanner;
 import org.academiadecodigo.bootcamp.scanners.precisiondouble.DoubleInputScanner;
 import org.academiadecodigo.javabank.controller.DepositController;
-import org.academiadecodigo.javabank.model.domain.Bank;
+import org.academiadecodigo.javabank.model.Bank;
 import org.academiadecodigo.javabank.utils.Messages;
 
 import java.util.Set;

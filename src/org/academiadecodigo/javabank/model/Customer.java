@@ -1,7 +1,7 @@
-package org.academiadecodigo.javabank.model.domain;
+package org.academiadecodigo.javabank.model;
 
-import org.academiadecodigo.javabank.model.domain.account.Account;
-import org.academiadecodigo.javabank.model.domain.account.AccountType;
+import org.academiadecodigo.javabank.model.account.Account;
+import org.academiadecodigo.javabank.model.account.AccountType;
 import org.academiadecodigo.javabank.controller.managers.AccountManager;
 
 import java.util.*;

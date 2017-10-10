@@ -2,15 +2,10 @@ package org.academiadecodigo.javabank;
 
 import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.javabank.controller.*;
-import org.academiadecodigo.javabank.controller.operations.BalanceOperation;
-import org.academiadecodigo.javabank.controller.operations.NewAccountOperation;
-import org.academiadecodigo.javabank.controller.operations.Operation;
-import org.academiadecodigo.javabank.controller.operations.transaction.DepositOperation;
-import org.academiadecodigo.javabank.controller.operations.transaction.WithdrawOperation;
-import org.academiadecodigo.javabank.model.domain.account.AccountType;
+import org.academiadecodigo.javabank.model.account.AccountType;
 import org.academiadecodigo.javabank.view.*;
-import org.academiadecodigo.javabank.model.domain.Bank;
-import org.academiadecodigo.javabank.model.domain.Customer;
+import org.academiadecodigo.javabank.model.Bank;
+import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.controller.managers.AccountManager;
 
 import java.text.DecimalFormat;

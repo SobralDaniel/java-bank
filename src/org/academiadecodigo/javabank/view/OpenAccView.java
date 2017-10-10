@@ -3,8 +3,8 @@ package org.academiadecodigo.javabank.view;
 import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.bootcamp.scanners.menu.MenuInputScanner;
 import org.academiadecodigo.javabank.controller.OpenAccController;
-import org.academiadecodigo.javabank.model.domain.Bank;
-import org.academiadecodigo.javabank.model.domain.account.AccountType;
+import org.academiadecodigo.javabank.model.Bank;
+import org.academiadecodigo.javabank.model.account.AccountType;
 import org.academiadecodigo.javabank.utils.Messages;
 
 public class OpenAccView implements View{

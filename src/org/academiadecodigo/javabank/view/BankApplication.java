@@ -8,7 +8,7 @@ import org.academiadecodigo.javabank.controller.operations.NewAccountOperation;
 import org.academiadecodigo.javabank.controller.operations.Operation;
 import org.academiadecodigo.javabank.controller.operations.transaction.DepositOperation;
 import org.academiadecodigo.javabank.controller.operations.transaction.WithdrawOperation;
-import org.academiadecodigo.javabank.model.domain.Bank;
+import org.academiadecodigo.javabank.model.Bank;
 import org.academiadecodigo.javabank.utils.Messages;
 
 import java.util.HashMap;

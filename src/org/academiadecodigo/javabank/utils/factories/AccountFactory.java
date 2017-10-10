@@ -1,7 +1,9 @@
 package org.academiadecodigo.javabank.utils.factories;
 
-import org.academiadecodigo.javabank.model.domain.account.*;
-import org.academiadecodigo.javabank.model.domain.account.CheckingAccount;
+import org.academiadecodigo.javabank.model.account.Account;
+import org.academiadecodigo.javabank.model.account.AccountType;
+import org.academiadecodigo.javabank.model.account.SavingsAccount;
+import org.academiadecodigo.javabank.model.account.CheckingAccount;
 
 public class AccountFactory {
 

@@ -1,4 +1,4 @@
-package org.academiadecodigo.javabank.model.domain.account;
+package org.academiadecodigo.javabank.model.account;
 
 public interface Account {
 

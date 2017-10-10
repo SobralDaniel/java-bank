@@ -2,7 +2,7 @@ package org.academiadecodigo.javabank.controller.operations;
 
 import org.academiadecodigo.javabank.view.BankApplication;
 import org.academiadecodigo.javabank.utils.Messages;
-import org.academiadecodigo.javabank.model.domain.account.Account;
+import org.academiadecodigo.javabank.model.account.Account;
 
 import java.text.DecimalFormat;
 import java.util.Set;

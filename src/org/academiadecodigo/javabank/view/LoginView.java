@@ -2,9 +2,8 @@ package org.academiadecodigo.javabank.view;
 
 import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.bootcamp.scanners.integer.IntegerSetInputScanner;
-import org.academiadecodigo.javabank.controller.Controller;
 import org.academiadecodigo.javabank.controller.LoginController;
-import org.academiadecodigo.javabank.model.domain.Bank;
+import org.academiadecodigo.javabank.model.Bank;
 import org.academiadecodigo.javabank.utils.Messages;
 
 public class LoginView implements View{

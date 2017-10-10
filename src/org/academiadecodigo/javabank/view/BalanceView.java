@@ -2,9 +2,8 @@ package org.academiadecodigo.javabank.view;
 
 import org.academiadecodigo.bootcamp.Prompt;
 import org.academiadecodigo.javabank.controller.BalanceController;
-import org.academiadecodigo.javabank.controller.DepositController;
-import org.academiadecodigo.javabank.model.domain.Bank;
-import org.academiadecodigo.javabank.model.domain.account.Account;
+import org.academiadecodigo.javabank.model.Bank;
+import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.utils.Messages;
 
 import java.text.DecimalFormat;
