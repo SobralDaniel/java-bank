@@ -1,4 +1,4 @@
-package org.academiadecodigo.javabank.test;
+package test;
 
 import org.academiadecodigo.javabank.model.account.CheckingAccount;
 import org.academiadecodigo.javabank.services.AccountService;
