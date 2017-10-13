@@ -1,19 +1,44 @@
 package org.academiadecodigo.javabank.model.account;
 
-import org.academiadecodigo.javabank.model.Model;
+import org.academiadecodigo.javabank.model.AbstractModel;
+import org.academiadecodigo.javabank.model.Customer;
 
-public interface Account extends Model {
+import javax.persistence.*;
 
-    AccountType getAccountType();
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn (name = "accountType")
+public abstract class Account extends AbstractModel {
 
-    double getBalance();
+    @ManyToOne
+    private Customer customer;
+    private double balance = 0;
 
-    void credit(double amount);
+    public void credit(double amount) {
+        if (canCredit(amount)) {
+            balance += amount;
+        }
+    }
 
-    void debit(double amount);
+    public void debit(double amount) {
+        if (canDebit(amount)) {
+            balance -= amount;
+        }
+    }
 
-    boolean canDebit(double amount);
 
-    boolean canCredit(double amount);
+    public double getBalance() {
+        return balance;
+    }
+
+    public abstract AccountType getAccountType();
+
+    public boolean canDebit(double amount) {
+        return amount > 0 && amount <= balance;
+    }
+
+    public boolean canCredit(double amount) {
+        return amount > 0;
+    }
 
 }

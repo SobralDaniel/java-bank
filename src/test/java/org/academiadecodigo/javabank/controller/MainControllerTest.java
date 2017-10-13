@@ -36,7 +36,7 @@ public class MainControllerTest {
     public void onMenuSelectionQuitTest(){
         mainController.onMenuSelection(UserOptions.QUIT.getOption());
 
-        
+
     }
 
     @Test
