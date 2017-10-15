@@ -14,6 +14,10 @@ public abstract class Account extends AbstractModel {
     private Customer customer;
     private double balance = 0;
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     public void credit(double amount) {
         if (canCredit(amount)) {
             balance += amount;
@@ -40,5 +44,6 @@ public abstract class Account extends AbstractModel {
     public boolean canCredit(double amount) {
         return amount > 0;
     }
+
 
 }

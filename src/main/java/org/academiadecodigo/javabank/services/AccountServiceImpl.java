@@ -1,5 +1,6 @@
 package org.academiadecodigo.javabank.services;
 
+import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.model.account.AccountType;
 
@@ -11,7 +12,7 @@ public class AccountServiceImpl implements AccountService {
 
     private Map<Integer, Account> accountMap = new HashMap<>();
 
-    public void add(Account account) {
+    public void add(Account account, Customer customer) {
 
         if (account.getId() == null) {
             account.setId(getNextId());
