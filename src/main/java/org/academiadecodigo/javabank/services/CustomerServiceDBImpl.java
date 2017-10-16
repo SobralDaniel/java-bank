@@ -4,10 +4,7 @@ import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.account.Account;
 import sun.text.resources.cldr.om.FormatData_om;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,24 +19,29 @@ public class CustomerServiceDBImpl implements CustomerService {
     @Override
     public void add(Customer customer) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(customer);
-        em.getTransaction().commit();
-        em.close();
+
+        try{
+            em.getTransaction().begin();
+            em.persist(customer);
+            em.getTransaction().commit();
+        } catch (RollbackException ex){
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public Customer findById(Integer id) {
         Customer customer;
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT c FROM Customer c WHERE c.id LIKE :customerID");
-        query.setParameter("customerID", id);
+
         try{
-            customer = (Customer) query.getSingleResult();
-        }catch (NoResultException exception){
-            customer = null;
+            customer = em.find(Customer.class, id);
+        } finally {
+            em.close();
         }
-        em.close();
+
         return customer;
     }
 
@@ -47,26 +49,34 @@ public class CustomerServiceDBImpl implements CustomerService {
     public List<Customer> findAll() {
         List<Customer> customer;
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT * FROM Customer c ");
+
         try{
+            Query query = em.createQuery("SELECT * FROM Customer c ");
             customer =  query.getResultList();
-        }catch (NoResultException exception){
-            customer = null;
+        } finally {
+            em.close();
         }
-        em.close();
+
         return customer;
     }
 
     @Override
     public Set<Integer> getCustomerIds() {
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT c.id FROM Customer c");
-        List<Integer> list = query.getResultList();
         Set<Integer> set = null;
-        for (Integer i : list) {
-            set.add(i);
+
+        try {
+            Query query = em.createQuery("SELECT c.id FROM Customer c");
+            List<Integer> list = query.getResultList();
+
+            for (Integer i : list) {
+                set.add(i);
+            }
+        } finally {
+            em.close();
         }
-        em.close();
+
+
         return set;
     }
 
@@ -74,19 +84,20 @@ public class CustomerServiceDBImpl implements CustomerService {
     public double getBalance(int customerId) {
         Customer customer;
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT c FROM Customer c WHERE c.id LIKE :customerID");
-        query.setParameter("customerID", customerId);
-        try{
-            customer = (Customer) query.getSingleResult();
-        }catch (NoResultException exception){
-            customer = null;
-        }
-        List<Account> accounts = customer.getAccounts();
         double balance = 0;
-        for (Account account : accounts) {
-            balance += account.getBalance();
+
+        try {
+            customer = em.find(Customer.class, customerId);
+            List<Account> accounts = customer.getAccounts();
+
+            for (Account account : accounts) {
+                balance += account.getBalance();
+            }
+        } finally {
+            em.close();
         }
-        em.close();
+
+
         return balance;
 
     }
@@ -94,11 +105,24 @@ public class CustomerServiceDBImpl implements CustomerService {
     @Override
     public Set<Integer> getCustomerAccountNumbers(Integer id) {
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT c.id FROM Account c WHERE c.customer.id LIKE :customerID");
-        query.setParameter("customerID", id);
-        List<Integer> list = query.getResultList();
-        Set<Integer> set = new HashSet<>(list);
-        em.close();
+        Set<Integer> set = new HashSet<>();
+
+        try {
+            Customer customer = em.find(Customer.class, id);
+            List<Account> list = customer.getAccounts();
+            set = getAccountIDs(list);
+        } finally {
+            em.close();
+        }
+
+        return set;
+    }
+
+    private Set<Integer> getAccountIDs(List<Account> list) {
+        Set<Integer> set = new HashSet<>();
+        for (Account account : list) {
+            set.add(account.getId());
+        }
         return set;
     }
 }

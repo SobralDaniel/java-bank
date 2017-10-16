@@ -13,25 +13,25 @@ import java.sql.SQLException;
 public class App {
 
     public static void main(String[] args) {
+        H2WebServer h2WebServer;
         try {
-            H2WebServer h2WebServer = new H2WebServer();
-            h2WebServer.start();
+            h2WebServer = new H2WebServer();
+            if (Config.PERSISTENCE_UNIT != "prod"){
+
+                h2WebServer.start();
+            }
 
 
             EntityManagerFactory emf = Persistence.createEntityManagerFactory(Config.PERSISTENCE_UNIT);
-            EntityManager em = emf.createEntityManager();
-            em.getTransaction().begin();
-            Customer c = new Customer();
-            c.setName("Rui");
-            em.persist(c);
-            em.getTransaction().commit();
-            em.close();
 
             App app = new App();
             app.bootStrap(emf);
 
             emf.close();
-            h2WebServer.stop();
+            if (Config.PERSISTENCE_UNIT != "prod"){
+                h2WebServer.stop();
+            }
+
 
         }
         catch (SQLException ex){

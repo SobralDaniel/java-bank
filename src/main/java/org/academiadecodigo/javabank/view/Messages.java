@@ -29,4 +29,7 @@ public class Messages {
     public final static String MENU_GET_BALANCE = "View Balance";
     public final static String MENU_QUIT = "Quit";
 
+    public final static String MENU_CHECKING = "Checking";
+    public final static String MENU_SAVINGS = "Savings";
+
 }

@@ -6,6 +6,7 @@ import org.academiadecodigo.javabank.controller.transaction.DepositController;
 import org.academiadecodigo.javabank.controller.transaction.WithdrawalController;
 import org.academiadecodigo.javabank.factories.AccountFactory;
 import org.academiadecodigo.javabank.model.Customer;
+import org.academiadecodigo.javabank.model.account.AccountType;
 import org.academiadecodigo.javabank.services.*;
 import org.academiadecodigo.javabank.view.*;
 
@@ -71,6 +72,7 @@ public class Bootstrap {
         newAccountController.setAccountService(accountService);
         newAccountController.setAuthService(authService);
         newAccountController.setAccountFactory(new AccountFactory());
+        newAccountView.setPrompt(prompt);
         newAccountController.setView(newAccountView);
         newAccountView.setNewAccountController(newAccountController);
 
@@ -100,6 +102,14 @@ public class Bootstrap {
         controllerMap.put(UserOptions.WITHDRAW.getOption(), withdrawalController);
 
         mainController.setControllerMap(controllerMap);
+
+        // setup accounttype map
+
+        Map<Integer, AccountType> accountTypeMap = new HashMap<>();
+        accountTypeMap.put(AccountType.CHECKING.getOption(), AccountType.CHECKING);
+        accountTypeMap.put(AccountType.SAVINGS.getOption(), AccountType.SAVINGS);
+
+        newAccountController.setAccountTypeMap(accountTypeMap);
 
         return loginController;
     }

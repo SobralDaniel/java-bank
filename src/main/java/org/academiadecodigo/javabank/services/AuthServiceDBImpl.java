@@ -9,7 +9,7 @@ import javax.persistence.Query;
 
 public class AuthServiceDBImpl implements AuthService {
     EntityManagerFactory emf;
-    private Customer acessingCustomer;
+    private Customer acessingCustomer=null;
 
     public AuthServiceDBImpl(EntityManagerFactory emf) {
         this.emf = emf;
@@ -18,14 +18,13 @@ public class AuthServiceDBImpl implements AuthService {
     @Override
     public boolean authenticate(Integer id) {
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT c FROM Customer c WHERE c.id LIKE :customerID");
-        query.setParameter("customerID", id);
+
         try{
-            acessingCustomer = (Customer) query.getSingleResult();
-        }catch (NoResultException exception){
-            acessingCustomer = null;
+            acessingCustomer = em.find(Customer.class, id);
+        } finally {
+            em.close();
         }
-        em.close();
+
         return acessingCustomer != null;
     }
 
