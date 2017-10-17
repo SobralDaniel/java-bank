@@ -31,4 +31,10 @@ public class MockAccountService extends AbstractMockService<Account> implements 
             dstAccount.credit(amount);
         }
     }
+
+    @Override
+    public Account addAccount(Account account) {
+        modelMap.put(account.getId(), account);
+        return account;
+    }
 }

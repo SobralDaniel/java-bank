@@ -5,12 +5,21 @@ import org.academiadecodigo.javabank.controller.*;
 import org.academiadecodigo.javabank.controller.transaction.DepositController;
 import org.academiadecodigo.javabank.controller.transaction.WithdrawalController;
 import org.academiadecodigo.javabank.factories.AccountFactory;
+import org.academiadecodigo.javabank.manager.JpaSessionManager;
+import org.academiadecodigo.javabank.manager.JpaTransactionManager;
 import org.academiadecodigo.javabank.model.Customer;
+import org.academiadecodigo.javabank.model.account.Account;
+import org.academiadecodigo.javabank.persistence.jpa.CustomerDao;
+import org.academiadecodigo.javabank.persistence.jpa.JpaAccountDAO;
+import org.academiadecodigo.javabank.persistence.jpa.JpaCustomerDAO;
 import org.academiadecodigo.javabank.services.AccountService;
 import org.academiadecodigo.javabank.services.CustomerService;
 import org.academiadecodigo.javabank.services.AuthServiceImpl;
+import org.academiadecodigo.javabank.services.jpa.JpaAccountService;
+import org.academiadecodigo.javabank.services.jpa.JpaCustomerService;
 import org.academiadecodigo.javabank.view.*;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,13 +29,30 @@ public class Bootstrap {
     private CustomerService customerService;
     private AccountService accountService;
 
-    public Controller wireObjects() {
+    public Controller wireObjects(EntityManagerFactory emf) {
+
+        JpaSessionManager sessionManager = new JpaSessionManager();
+        sessionManager.setEmf(emf);
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setSm(sessionManager);
+
+        ((JpaCustomerService)customerService).setTm(transactionManager);
+        JpaCustomerDAO customerDAO = new JpaCustomerDAO();
+        customerDAO.setSm(sessionManager);
+        customerDAO.settClass(Customer.class);
+        authService.setCustomerDao(customerDAO);
+        ((JpaCustomerService)customerService).setCustomerDAO(customerDAO);
+        ((JpaAccountService)accountService).setTm(transactionManager);
+        JpaAccountDAO accountDAO = new JpaAccountDAO();
+        accountDAO.setSm(sessionManager);
+        accountDAO.settClass(Account.class);
+        ((JpaAccountService)accountService).setAccountDAO(accountDAO);
 
         // attach all input to standard i/o
         Prompt prompt = new Prompt(System.in, System.out);
 
         // wire services
-        authService.setCustomerService(customerService);
+        authService.setCustomerDao(customerDAO);
 
         // wire login controller and view
         LoginController loginController = new LoginController();

@@ -1,6 +1,10 @@
 package org.academiadecodigo.javabank;
 
 import org.academiadecodigo.javabank.controller.Controller;
+import org.academiadecodigo.javabank.manager.JpaSessionManager;
+import org.academiadecodigo.javabank.manager.JpaTransactionManager;
+import org.academiadecodigo.javabank.manager.SessionManager;
+import org.academiadecodigo.javabank.manager.TransactionManager;
 import org.academiadecodigo.javabank.persistence.H2WebServer;
 import org.academiadecodigo.javabank.services.jpa.JpaAccountService;
 import org.academiadecodigo.javabank.services.jpa.JpaCustomerService;
@@ -24,6 +28,7 @@ public class App {
 
             EntityManagerFactory emf = Persistence.createEntityManagerFactory(Config.PERSISTENCE_UNIT);
 
+
             App app = new App();
             app.bootStrap(emf);
 
@@ -40,10 +45,10 @@ public class App {
         Bootstrap bootstrap = new Bootstrap();
 
         bootstrap.setAuthService(new AuthServiceImpl());
-        bootstrap.setAccountService(new JpaAccountService(emf));
-        bootstrap.setCustomerService(new JpaCustomerService(emf));
+        bootstrap.setAccountService(new JpaAccountService());
+        bootstrap.setCustomerService(new JpaCustomerService());
 
-        Controller controller = bootstrap.wireObjects();
+        Controller controller = bootstrap.wireObjects(emf);
 
         // start application
         controller.init();

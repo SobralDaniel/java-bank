@@ -4,6 +4,7 @@ import org.academiadecodigo.javabank.factories.AccountFactory;
 import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.model.account.AccountType;
 import org.academiadecodigo.javabank.services.AccountService;
+import org.academiadecodigo.javabank.services.CustomerService;
 
 public class NewAccountController extends AbstractController {
 
@@ -21,7 +22,7 @@ public class NewAccountController extends AbstractController {
 
         Account newAccount = accountFactory.createAccount(AccountType.CHECKING);
         authService.getAccessingCustomer().addAccount(newAccount);
-        Account account = accountService.saveOrUpdate(newAccount);
+        Account account = accountService.addAccount(newAccount);
         return account.getId();
     }
 
