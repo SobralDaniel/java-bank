@@ -17,14 +17,14 @@ public class CustomerServiceImpl implements CustomerService {
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
     }
-    @Transactional
+
     @Override
     public Customer findById(Integer id) {
 
         return customerDao.findById(id);
 
     }
-    @Transactional
+
     @Override
     public double getBalance(Integer id) {
 
@@ -44,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
         return balance;
 
     }
-    @Transactional
+
     @Override
     public Set<Integer> getCustomerAccountIds(Integer id) {
 

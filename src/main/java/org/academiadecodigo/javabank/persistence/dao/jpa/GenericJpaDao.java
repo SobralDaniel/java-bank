@@ -22,7 +22,7 @@ public abstract class GenericJpaDao<T extends Model> implements Dao<T> {
         this.modelType = modelType;
     }
 
-    @Transactional
+
     @Override
     public List<T> findAll() {
 
@@ -31,21 +31,20 @@ public abstract class GenericJpaDao<T extends Model> implements Dao<T> {
             return em.createQuery(criteriaQuery).getResultList();
 
     }
-    @Transactional
+
     @Override
     public T findById(Integer id) {
 
             return em.find(modelType, id);
 
     }
-    @Transactional
     @Override
     public T saveOrUpdate(T modelObject) {
 
             return em.merge(modelObject);
 
     }
-    @Transactional
+
     @Override
     public void delete(Integer id) {
 

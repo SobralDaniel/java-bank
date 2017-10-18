@@ -16,7 +16,6 @@ public class JpaCustomerDao extends GenericJpaDao<Customer> implements CustomerD
         super(Customer.class);
     }
 
-    @Transactional
     public List<Integer> getCustomerIds() {
 
             return em.createQuery("select id from Customer", Integer.class)
