@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" default-lazy-init="true">
+
+
+    <bean id="loginView" class="org.academiadecodigo.javabank.view.LoginView">
+        <property name="loginController" ref="loginController"/>
+        <property name="prompt" ref="prompt"/>
+    </bean>
+
+    <bean id="mainView" class="org.academiadecodigo.javabank.view.MainView">
+        <property name="prompt" ref="prompt"/>
+        <property name="mainController" ref="mainController"/>
+    </bean>
+
+    <bean id="balanceView" class="org.academiadecodigo.javabank.view.BalanceView">
+        <property name="balanceController" ref="balanceController"/>
+    </bean>
+
+    <bean id="newAccountView" class="org.academiadecodigo.javabank.view.NewAccountView">
+        <property name="newAccountController" ref="newAccountController"/>
+    </bean>
+
+    <bean id="depositView" class="org.academiadecodigo.javabank.view.AccountTransactionView">
+        <property name="prompt" ref="prompt"/>
+        <property name="transactionController" ref="depositController"/>
+    </bean>
+
+    <bean id="withdrawalView" class="org.academiadecodigo.javabank.view.AccountTransactionView">
+        <property name="prompt" ref="prompt"/>
+        <property name="transactionController" ref="withdrawalController"/>
+    </bean>
+
+    <bean id="prompt" class="org.academiadecodigo.bootcamp.Prompt">
+        <constructor-arg name="input" ref="systemin"/>
+        <constructor-arg name="output" ref="systemout"/>
+    </bean>
+
+    <bean id="systemin" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField" value="java.lang.System.in"/>
+    </bean>
+
+    <bean id="systemout" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField" value="java.lang.System.out"/>
+    </bean>
+</beans>

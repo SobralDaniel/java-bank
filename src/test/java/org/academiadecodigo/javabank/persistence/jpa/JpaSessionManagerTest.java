@@ -20,7 +20,7 @@ public class JpaSessionManagerTest {
 
         emf = mock(EntityManagerFactory.class);
         em = mock(EntityManager.class);
-        sm = new JpaSessionManager(emf);
+        sm = new JpaSessionManager();
 
 
         when(emf.createEntityManager()).thenReturn(em);

@@ -5,15 +5,13 @@ import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 
 public class JpaSessionManager implements SessionManager<EntityManager> {
-
+    @PersistenceUnit
     private EntityManagerFactory emf;
     private EntityManager em;
 
-    public JpaSessionManager(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
 
     @Override
     public void startSession() {
