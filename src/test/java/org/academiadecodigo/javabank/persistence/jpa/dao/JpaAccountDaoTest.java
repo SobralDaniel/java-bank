@@ -32,7 +32,6 @@ public class JpaAccountDaoTest {
         sm = mock(JpaSessionManager.class);
         em = mock(EntityManager.class);
         customerDao = new JpaAccountDao();
-        customerDao.setSm(sm);
 
         when(sm.getCurrentSession()).thenReturn(em);
 

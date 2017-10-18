@@ -24,7 +24,6 @@ public class JpaAccountDaoIntegrationTest extends JpaIntegrationTestHelper {
     public void setup() {
 
         accountDao = new JpaAccountDao();
-        accountDao.setSm(sm);
 
     }
 
