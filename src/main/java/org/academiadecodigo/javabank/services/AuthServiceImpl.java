@@ -1,10 +1,14 @@
 package org.academiadecodigo.javabank.services;
 
 import org.academiadecodigo.javabank.model.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthServiceImpl implements AuthService {
 
     private Integer accessingCustomerId;
+    @Autowired
     private CustomerService customerService;
 
     @Override

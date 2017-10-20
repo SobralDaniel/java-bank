@@ -2,10 +2,14 @@ package org.academiadecodigo.javabank.services;
 
 import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.persistence.dao.AccountDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class AccountServiceImpl implements AccountService {
 
+    @Autowired
     private AccountDao accountDao;
 
     public void setAccountDao(AccountDao accountDao) {

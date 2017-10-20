@@ -39,4 +39,10 @@ public class MockCustomerService extends AbstractMockService<Customer> implement
 
         return accountIds;
     }
+
+    @Override
+    public List<Customer> findAll() {
+        List<Customer> list = new ArrayList<Customer>(modelMap.values());
+        return list;
+    }
 }

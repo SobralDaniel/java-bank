@@ -2,6 +2,7 @@ package org.academiadecodigo.javabank.persistence.dao.jpa;
 
 import org.academiadecodigo.javabank.model.Model;
 import org.academiadecodigo.javabank.persistence.dao.Dao;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +15,7 @@ public abstract class GenericJpaDao<T extends Model> implements Dao<T> {
     protected Class<T> modelType;
 
     @PersistenceContext
+    @Autowired
     protected EntityManager em;
 
     public void setEm(EntityManager em) {
