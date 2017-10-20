@@ -15,4 +15,6 @@ public interface CustomerService {
 
     Set<Integer> getCustomerAccountIds(Integer id);
 
+    void delete(Integer id);
+
 }

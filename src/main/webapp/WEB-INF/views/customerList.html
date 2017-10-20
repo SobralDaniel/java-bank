@@ -13,6 +13,8 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Show</th>
+            <th>Delete</th>
         </tr>
         <tr th:each="customer : ${customers}">
             <td th:text="${customer.id}"></td>
@@ -20,6 +22,9 @@
             <td th:text="${customer.lastName}"></td>
             <td th:text="${customer.email}"></td>
             <td th:text="${customer.phone}"></td>
+            <td><a th:href="'/ds/customer/'+${customer.id}">Show</a> </td>
+            <td><a th:href="'/ds/customer/delete/'+${customer.id}">Delete</a> </td>
+
         </tr>
     </table>
 </div>

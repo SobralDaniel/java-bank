@@ -1,0 +1,27 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>JavaBank</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<div>
+    <h1 th:text="${'Customer ' + customer.id}"></h1>
+    <h2 th:text="${'First Name: ' + customer.firstName}"></h2>
+    <h2 th:text="${'Last Name: ' + customer.lastName}"></h2>
+    <h2 th:text="${'Email: ' + customer.email}"></h2>
+    <h2 th:text="${'Phone: ' + customer.phone}"></h2>
+
+    <h1 th:text="Accounts"></h1>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Balance</th>
+        </tr>
+        <tr th:each="account : ${accounts}">
+            <td th:text="${account.id}"></td>
+            <td th:text="${account.balance}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
