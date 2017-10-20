@@ -5,7 +5,6 @@ import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.model.account.CheckingAccount;
 import org.academiadecodigo.javabank.model.account.SavingsAccount;
 import org.academiadecodigo.javabank.persistence.dao.jpa.JpaCustomerDao;
-import org.academiadecodigo.javabank.persistence.jpa.JpaIntegrationTestHelper;
 import org.junit.Before;
 import org.junit.Test;
 

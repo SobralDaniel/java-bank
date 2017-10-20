@@ -1,12 +1,7 @@
 package org.academiadecodigo.javabank.persistence.dao.jpa;
 
 import org.academiadecodigo.javabank.model.Model;
-import org.academiadecodigo.javabank.persistence.TransactionException;
 import org.academiadecodigo.javabank.persistence.dao.Dao;
-import org.academiadecodigo.javabank.persistence.jpa.JpaSessionManager;
-import org.hibernate.HibernateException;
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
