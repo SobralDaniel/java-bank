@@ -5,6 +5,11 @@
 </head>
 <body>
 <div>
+    <p th:text="${deleteCustomer}"></p>
+    <p th:text="${saveCustomer}"></p>
+    <p th:text="${addCustomer}"></p>
+</div>
+<div>
     <h2>Customer List</h2>
     <table>
         <tr>
@@ -24,9 +29,9 @@
             <td th:text="${customer.phone}"></td>
             <td><a th:href="'/ds/customer/'+${customer.id}">Show</a> </td>
             <td><a th:href="'/ds/customer/delete/'+${customer.id}">Delete</a> </td>
-
         </tr>
     </table>
+    <a th:href="'/ds/customer/add'"><h2>New Customer</h2></a>
 </div>
 </body>
 </html>

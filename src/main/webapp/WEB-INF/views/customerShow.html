@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>JavaBank</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -10,6 +10,9 @@
     <h2 th:text="${'Last Name: ' + customer.lastName}"></h2>
     <h2 th:text="${'Email: ' + customer.email}"></h2>
     <h2 th:text="${'Phone: ' + customer.phone}"></h2>
+</div>
+
+<div th:if="${accounts.size() > 0}">
 
     <h1 th:text="Accounts"></h1>
     <table>
@@ -22,6 +25,16 @@
             <td th:text="${account.balance}"></td>
         </tr>
     </table>
+</div>
+<div th:if="${accounts.size() <= 0}">
+
+    <h1>No Accounts</h1>
+
+</div>
+<div>
+
+    <a th:href="'/ds/customer/edit/'+${customer.id}"><h2>Edit</h2></a>
+
 </div>
 </body>
 </html>

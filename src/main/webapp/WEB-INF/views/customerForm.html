@@ -1,0 +1,25 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>JavaBank</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<div>
+    <h1>Customer Details</h1>
+    <form th:object="${customer}" th:action="@{/customer/save}" th:method="post">
+        <input th:type="hidden" th:field="*{id}"/>
+        <input th:type="hidden" th:field="*{version}"/>
+
+        <p>First Name: <input th:type="text" th:field="*{firstName}"/></p>
+        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+            <p>ERROR</p>
+        </span>
+        <p>Last Name: <input th:type="text" th:field="*{lastName}"/></p>
+        <p>Email:<input th:type="text" th:field="*{email}"/></p>
+        <p>Phone:<input th:type="text" th:field="*{phone}"/></p>
+        <input th:type="submit">
+    </form>
+</div>
+</body>
+</html>
+

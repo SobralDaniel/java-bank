@@ -32,6 +32,15 @@ public abstract class AbstractModel implements Model {
         this.id = id;
     }
 
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     @Override
     public String toString() {
         return "Model{" +
@@ -40,4 +49,5 @@ public abstract class AbstractModel implements Model {
                 ", updateTime=" + updateTime +
                 '}';
     }
+
 }
