@@ -10,13 +10,30 @@
         <input th:type="hidden" th:field="*{id}"/>
         <input th:type="hidden" th:field="*{version}"/>
 
-        <p>First Name: <input th:type="text" th:field="*{firstName}"/></p>
+
+        <label>First Name: </label>
+        <input th:type="text" th:field="*{firstName}"/><br>
         <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
-            <p>ERROR</p>
-        </span>
-        <p>Last Name: <input th:type="text" th:field="*{lastName}"/></p>
-        <p>Email:<input th:type="text" th:field="*{email}"/></p>
-        <p>Phone:<input th:type="text" th:field="*{phone}"/></p>
+            First Name field error messages
+        </span><br>
+
+        <label>Last Name: </label>
+        <input th:type="text" th:field="*{lastName}"/><br>
+        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+            Last Name field error messages
+        </span><br>
+
+        <label>Email:</label>
+        <input th:type="text" th:field="*{email}"/><br>
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+            Email field error messages
+        </span><br>
+
+        <label>Phone:</label>
+        <input th:type="text" th:field="*{phone}"/><br>
+        <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
+            Phone field error messages
+        </span><br>
         <input th:type="submit">
     </form>
 </div>

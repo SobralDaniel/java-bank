@@ -17,4 +17,9 @@
 
     <bean id="accountFactory" class="org.academiadecodigo.javabank.factories.AccountFactory"/>
 
+    <bean id="customerConverter" class="org.academiadecodigo.javabank.factories.CustomerConverter"/>
+
+    <bean id="customerController" class="org.academiadecodigo.javabank.controller.CustomerController">
+        <property name="customerConverter" ref="customerConverter"/>
+    </bean>
 </beans>

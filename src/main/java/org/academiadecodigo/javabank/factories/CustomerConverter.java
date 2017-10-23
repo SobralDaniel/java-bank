@@ -4,10 +4,9 @@ import org.academiadecodigo.javabank.model.Customer;
 import org.academiadecodigo.javabank.model.CustomerDTO;
 import org.academiadecodigo.javabank.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
-public class Converter {
+
+public class CustomerConverter {
 
     @Autowired
     private CustomerService customerService;
@@ -31,5 +30,9 @@ public class Converter {
         customerDTO.setEmail(customer.getEmail());
         customerDTO.setPhone(customer.getPhone());
         return customerDTO;
+    }
+
+    public void setCustomerService(CustomerService customerService) {
+        this.customerService = customerService;
     }
 }

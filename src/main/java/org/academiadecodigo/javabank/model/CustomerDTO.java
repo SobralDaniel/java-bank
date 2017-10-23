@@ -6,18 +6,20 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class CustomerDTO extends AbstractModel{
-    @NotBlank(message = "First Name is mandatory")
-    @Size(min = 3, max = 64, message = "Must contain between 3 and 64 characters")
+
+    @NotBlank(message = "first Name is mandatory")
+    @Size(min = 3, max = 64)
     private String firstName;
 
-    @Size(min = 3, max = 64, message = "Must contain between 3 and 64 characters")
+    @NotBlank(message = "last name is mandatory")
+    @Size(min = 3, max = 64)
     private String lastName;
 
-    @Email(message = "Must be a valid e-mail format")
+    @Email
     private String email;
 
     @Pattern(regexp = "[+0-9]*", message = "Phone has invalid characters")
-    @Size(min = 9, max = 16, message = "Must contain between 9 and 16 numbers ")
+    @Size(min = 9, max = 16)
     private String phone;
 
     public String getFirstName() {
