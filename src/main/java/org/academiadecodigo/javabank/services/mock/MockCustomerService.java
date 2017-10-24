@@ -9,7 +9,7 @@ import java.util.*;
 public class MockCustomerService extends AbstractMockService<Customer> implements CustomerService {
 
     @Override
-    public Customer findById(Integer id) {
+    public Customer get(Integer id) {
         return modelMap.get(id);
     }
 
@@ -41,19 +41,23 @@ public class MockCustomerService extends AbstractMockService<Customer> implement
     }
 
     @Override
-    public List<Customer> findAll() {
-        List<Customer> list = new ArrayList<Customer>(modelMap.values());
-        return list;
+    public List<Customer> list() {
+        return new ArrayList<>(modelMap.values());
+    }
+
+    @Override
+    public Customer save(Customer customer) {
+
+        if (customer.getId() == null) {
+            customer.setId(getNextId());
+        }
+
+        modelMap.put(customer.getId(), customer);
+        return customer;
     }
 
     @Override
     public void delete(Integer id) {
         modelMap.remove(id);
-    }
-
-    @Override
-    public Customer saveOrUpdate(Customer customer) {
-        modelMap.put(getNextId(), customer);
-        return customer;
     }
 }

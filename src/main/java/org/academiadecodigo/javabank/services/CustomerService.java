@@ -7,15 +7,16 @@ import java.util.Set;
 
 public interface CustomerService {
 
-    Customer findById(Integer id);
+    List<Customer> list();
 
-    List<Customer> findAll();
+    Customer get(Integer id);
+
+    Customer save(Customer customer);
+
+    void delete(Integer id);
 
     double getBalance(Integer id);
 
     Set<Integer> getCustomerAccountIds(Integer id);
 
-    void delete(Integer id);
-
-    Customer saveOrUpdate(Customer customer);
 }

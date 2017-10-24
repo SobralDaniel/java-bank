@@ -104,23 +104,4 @@ public class JpaCustomerDaoTest {
 
     }
 
-    @Test
-    public void testGetCustomerIds() {
-
-        // setup
-        List<Integer> fakeCustomerIds = new ArrayList<>();
-        TypedQuery typedQuery = mock(TypedQuery.class);
-        when(em.createQuery(anyString(), eq(Integer.class))).thenReturn(typedQuery);
-        when(typedQuery.getResultList()).thenReturn(fakeCustomerIds);
-
-        // exercise
-        List<Integer> customerIds = customerDao.getCustomerIds();
-
-        // verify
-        verify(em, times(1)).createQuery("select id from Customer", Integer.class);
-        verify(typedQuery, times(1)).getResultList();
-        assertEquals(fakeCustomerIds, customerIds);
-
-    }
-
 }

@@ -1,90 +1,80 @@
 package org.academiadecodigo.javabank.controller;
 
-import org.academiadecodigo.javabank.factories.CustomerConverter;
+import org.academiadecodigo.javabank.command.CustomerDto;
+import org.academiadecodigo.javabank.converters.CustomerDtoToCustomer;
+import org.academiadecodigo.javabank.converters.CustomerToCustomerDto;
 import org.academiadecodigo.javabank.model.Customer;
-import org.academiadecodigo.javabank.model.CustomerDTO;
-import org.academiadecodigo.javabank.model.account.Account;
 import org.academiadecodigo.javabank.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
 
     @Autowired
-    CustomerService customerService;
+    private CustomerService customerService;
 
-    CustomerConverter customerConverter;
+    @Autowired
+    private CustomerDtoToCustomer customerDtoToCustomer;
 
-    @RequestMapping(method = RequestMethod.GET, value = {"/", "/list", ""})
-    public String customerList(Model model){
+    @Autowired
+    private CustomerToCustomerDto customerToCustomerDto;
 
-        List<Customer> customers = customerService.findAll();
-
-        model.addAttribute("customers", customers);
-
-        return "customerList";
+    @RequestMapping(method = RequestMethod.GET, path = {"/list", "/", ""})
+    public String listCustomers(Model model) {
+        model.addAttribute("customers", customerService.list());
+        return "customer/list";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public String customerShow(Model model, @PathVariable Integer id){
-        Customer customer = customerService.findById(id);
-        model.addAttribute("customer", customer);
-
-        List<Account> accounts = customerService.findById(id).getAccounts();
-
-        model.addAttribute("accounts", accounts);
-        return "customerShow";
+    @RequestMapping(method = RequestMethod.GET, path = "/add")
+    public String addCustomer(Model model) {
+        model.addAttribute("customer", new CustomerDto());
+        return "customer/add-update";
     }
-    @RequestMapping(method = RequestMethod.GET, value = "/delete/{id}")
-    public String customerDelete(@PathVariable Integer id, RedirectAttributes redirectAttributes){
+
+    @RequestMapping(method = RequestMethod.GET, path = "/edit/{id}")
+    public String editCustomer(@PathVariable Integer id, Model model) {
+        model.addAttribute("customer", customerToCustomerDto.convert(customerService.get(id)));
+        return "customer/add-update";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    public String showCustomer(@PathVariable Integer id, Model model) {
+        model.addAttribute("customer", customerService.get(id));
+        return "customer/show";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = {"/", ""})
+    public String saveCustomer(@Valid @ModelAttribute("customer") CustomerDto customerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+           return "customer/add-update";
+        }
+
+        Customer savedCustomer = customerService.save(customerDtoToCustomer.convert(customerDto));
+
+        redirectAttributes.addFlashAttribute("lastAction", "Saved " + savedCustomer.getFirstName() + " " + savedCustomer.getLastName());
+        return "redirect:/customer/";
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/delete/{id}")
+    public String deleteCustomer(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        Customer customer = customerService.get(id);
         customerService.delete(id);
-        redirectAttributes.addFlashAttribute("deleteCustomer", "Customer deleted successfully!");
-        return "redirect:/customer/";
+        redirectAttributes.addFlashAttribute("lastAction", "Deleted " + customer.getFirstName() + " " + customer.getLastName());
+        return "redirect:/customer";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/add")
-    public String customerForm(Model model){
-        model.addAttribute("customer", new CustomerDTO());
-        return "customerForm";
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/edit/{id}")
-    public String customerForm(Model model, @PathVariable Integer id){
-        CustomerDTO customer = customerConverter.customerToDto(customerService.findById(id));
-        model.addAttribute("customer", customer);
-
-        return "customerForm";
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/save")
-    public String customerSave(@Valid @ModelAttribute("customer") CustomerDTO customer, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model){
-
-        if(bindingResult.hasErrors()){
-            return "customerForm";
-        }
-
-        customerService.saveOrUpdate(customerConverter.dtoToCustomer(customer));
-        if(customer.getId()==null)
-            redirectAttributes.addFlashAttribute("addCustomer", "Customer added successfully!");
-        else {
-            redirectAttributes.addFlashAttribute("saveCustomer", "Customer updated successfully!");
-        }
-        return "redirect:/customer/";
-    }
-
-    public void setCustomerConverter(CustomerConverter customerConverter) {
-        this.customerConverter = customerConverter;
-    }
+//    @ExceptionHandler(Exception.class)
+//    public void handleAllException(Exception ex) {
+//        ex.printStackTrace();
+//    }
 }

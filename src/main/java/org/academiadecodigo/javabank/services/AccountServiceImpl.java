@@ -12,8 +12,9 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountDao accountDao;
 
-    public void setAccountDao(AccountDao accountDao) {
-        this.accountDao = accountDao;
+    @Override
+    public Account get(Integer id) {
+        return accountDao.findById(id);
     }
 
     @Transactional
@@ -73,6 +74,10 @@ public class AccountServiceImpl implements AccountService {
         accountDao.saveOrUpdate(srcAccount);
         accountDao.saveOrUpdate(dstAccount);
 
+    }
+
+    public void setAccountDao(AccountDao accountDao) {
+        this.accountDao = accountDao;
     }
 }
 
