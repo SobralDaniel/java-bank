@@ -40,7 +40,7 @@ public class CustomerServiceImplTest {
         when(customerDao.findById(fakeId)).thenReturn(fakeCustomer);
 
         // exercise
-        Customer customer = customerService.findById(fakeId);
+        Customer customer = customerService.get(fakeId);
 
         // verify
         assertEquals(fakeCustomer, customer);
